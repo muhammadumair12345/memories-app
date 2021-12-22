@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import memories from './images/memories.png';
+import Posts from './components/Posts/Posts';
+import Form from './components/Form/Form'
+import { Container, GlobalStyle, Header, Logo } from './App.style';
+import { Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getPosts } from './actions/posts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#c7213191',
+        }
+    }
+});
+
+const App = () => {
+    const dispatch = useDispatch();
+    const [currentId, setCurrentId] = useState(null);
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [dispatch]);
+
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Header>
+                <Typography variant="h4" component="div">
+                    MUSS Memories
+                </Typography>
+                <Logo src={memories} alt='memories' height='60' />
+            </Header>
+            <Container>
+                <Posts setCurrentId={setCurrentId} />
+                <Form currentId={currentId} setCurrentId={setCurrentId} />
+            </Container>
+        </ThemeProvider>
+    )
 }
 
-export default App;
+export default App; 
