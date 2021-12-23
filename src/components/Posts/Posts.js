@@ -1,11 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { PostsContainer } from './Posts.style';
 import { useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
-import LinearProgress from '@mui/material/LinearProgress';
 
-
-const Post = React.lazy(() => import('./Post/Post'))
+const Post = lazy(() => import('./Post/Post'))
 
 const Posts = ({ setCurrentId }) => {
     const posts = useSelector(state => state.postReducer);
