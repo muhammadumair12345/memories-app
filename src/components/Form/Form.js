@@ -66,7 +66,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     multiple={false}
                     onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                 />
-                <Button variant="contained" type="submit" color="primary">Submit</Button>
+                <Button variant="contained" type="submit">Submit</Button>
                 <Button variant="contained" onClick={clearData} color="error">Cancel</Button>
             </PostForm>
         </FormContainer >
