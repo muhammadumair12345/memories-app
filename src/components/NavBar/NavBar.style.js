@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 export const Container = styled.header`
     display: flex;
+    flex-wrap:wrap;
     justify-content:space-between;
     align-items: center;
     padding:0.5rem 2rem;
-    height:10vh;
+    min-height:10vh;
     gap:1rem;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     color:#fff;

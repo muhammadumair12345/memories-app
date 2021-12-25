@@ -3,7 +3,6 @@ import { AuthForm, Container } from './Auth.style'
 import { Button, Typography } from '@mui/material';
 import Input from '../Input/Input';
 
-
 const Auth = () => {
 
     const [showPassword, setShowPassword] = useState(false)
@@ -21,6 +20,7 @@ const Auth = () => {
 
     const switchMode = () => {
         setIsSignup((prev) => !prev);
+        handleShowPassword(false);
     }
 
     return (
