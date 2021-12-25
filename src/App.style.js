@@ -16,6 +16,21 @@ export const GlobalStyle = createGlobalStyle`
         background-repeat: no-repeat;
         background-size: cover;
         min-height:100vh;
+        overflow-y: auto;
+        ::-webkit-scrollbar {
+          width: 0.4rem;
+          height: 0.4rem;
+        }
+        ::-webkit-scrollbar-track {
+          background: #e7e2e2;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #c7213191;
+          border-radius: 1rem;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #ec748f;
+        }
     }
 `;
 

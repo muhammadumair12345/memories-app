@@ -57,7 +57,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     name="message"
                     multiline
                     required
-                    rows={4}
+                    rows={3}
                     value={postData.message} onChange={e => setPostData({ ...postData, message: e.target.value })}
                 />
                 <TextField label="Tags (comma separated)" required name="tags" variant="outlined" size='small' value={postData.tags} onChange={e => setPostData({ ...postData, tags: e.target.value.split(',') })} />

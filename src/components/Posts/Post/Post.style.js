@@ -30,7 +30,7 @@ export const CardHeader = styled.div`
     align-items: center;
 `;
 
-const ScrollBar = styled.div`
+export const ScrollBar = styled.div`
     height:${props => props.height};
     overflow-y: auto;
     ::-webkit-scrollbar {
