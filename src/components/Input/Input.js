@@ -11,6 +11,7 @@ const Input = ({ name, type, label, handleChange, handleShowPassword }) => {
             label={label}
             varient="outlined"
             required
+            autoComplete='on'
             onChange={handleChange}
             size='small'
             InputProps={

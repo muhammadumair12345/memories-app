@@ -27,3 +27,11 @@ export const Logo = styled.img`
     width:2.5rem;
     height:2.5rem;
 `;
+
+
+export const RightNav = styled.div`
+    display: flex;
+    align-items: center;
+    gap:1rem;
+`;
+
