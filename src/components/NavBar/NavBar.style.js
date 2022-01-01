@@ -26,6 +26,18 @@ export const Logo = styled.img`
     border-radius:50%;
     width:2.5rem;
     height:2.5rem;
+    cursor: pointer;
+`;
+
+export const User = styled.div`
+    border-radius:50%;
+    width:2.5rem;
+    height:2.5rem;
+    background-color: rgba(0,0,0,0.3);
+    cursor:pointer;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 

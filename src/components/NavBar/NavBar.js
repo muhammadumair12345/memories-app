@@ -1,14 +1,20 @@
 import { Button, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import { Brand, Container, Logo, RightNav } from './NavBar.style'
+import React, { useEffect, useState } from 'react'
+import { Brand, Container, Logo, RightNav, User } from './NavBar.style'
 import memories from '../../images/memories.png';
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const NavBar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const users = useSelector(state => state.authReducer);
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('profile')))
+    }, [users])
 
     const logout = () => {
         dispatch({ type: "LOGOUT" })
@@ -29,13 +35,14 @@ const NavBar = () => {
                     <Button component={Link} to="/auth" variant="contained">SIGN IN</Button> :
                     <RightNav>
                         <Button variant="contained" onClick={logout}>LOGOUT</Button>
-                        <Logo src={user?.result.imageUrl} alt='' />
+                        {user.result.imageUrl ?
+                            <Logo src={user?.result.imageUrl} alt='' /> :
+                            <User>{user.result.name.charAt(0)}</User>
+                        }
                     </RightNav>
-
-
             }
         </Container >
     )
 }
 
-export default NavBar
+export default NavBar;

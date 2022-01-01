@@ -16,7 +16,7 @@ const Post = ({ post, setCurrentId }) => {
             <CardImg image={post.selectedFile}>
                 <CardHeader>
                     <Typography variant="h6">
-                        {post.creator}
+                        {post.name}
                     </Typography>
                     <IconButton color="primary" onClick={() => setCurrentId(post._id)}>
                         <MoreHorizIcon />

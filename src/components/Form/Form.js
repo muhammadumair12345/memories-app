@@ -9,9 +9,9 @@ const Form = ({ currentId, setCurrentId }) => {
     const dispatch = useDispatch();
 
     const post = useSelector(state => currentId ? state.postReducer.find(p => p._id === currentId) : null);
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     const [postData, setPostData] = useState({
-        creator: '',
         title: '',
         message: '',
         tags: '',
@@ -25,17 +25,16 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId) {
-            dispatch(updatePost(currentId, postData));
+            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
         }
         else {
-            dispatch(createPost(postData));
+            dispatch(createPost({ ...postData, name: user?.result?.name }));
         }
         clearData();
     }
 
     const clearData = () => {
         setPostData({
-            creator: '',
             title: '',
             message: '',
             tags: '',
@@ -46,29 +45,34 @@ const Form = ({ currentId, setCurrentId }) => {
 
     return (
         <FormContainer>
-            <PostForm autoComplete='off' onSubmit={handleSubmit} >
-                <Typography variant="h6" color="primary">
-                    {post ? "Update" : "Create"} Memory
-                </Typography>
-                <TextField label="Creator" name="creator" variant="outlined" size='small' required value={postData.creator} onChange={e => setPostData({ ...postData, creator: e.target.value })} />
-                <TextField label="Title" name="title" variant="outlined" size='small' required value={postData.title} onChange={e => setPostData({ ...postData, title: e.target.value })} />
-                <TextField
-                    label="Message"
-                    name="message"
-                    multiline
-                    required
-                    rows={3}
-                    value={postData.message} onChange={e => setPostData({ ...postData, message: e.target.value })}
-                />
-                <TextField label="Tags (comma separated)" required name="tags" variant="outlined" size='small' value={postData.tags} onChange={e => setPostData({ ...postData, tags: e.target.value.split(',') })} />
-                <FileBase
-                    type="file"
-                    multiple={false}
-                    onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
-                />
-                <Button variant="contained" type="submit">Submit</Button>
-                <Button variant="contained" onClick={clearData} color="error">Cancel</Button>
-            </PostForm>
+            {!user?.result?.name ?
+                <PostForm>
+                    <Typography variant="h6" color="primary">
+                        Please Sign In to create your own memories and like other's memories.
+                    </Typography>
+                </PostForm> :
+                <PostForm autoComplete='off' onSubmit={handleSubmit} >
+                    <Typography variant="h6" color="primary">
+                        {post ? "Update" : "Create"} Memory
+                    </Typography>
+                    <TextField label="Title" name="title" variant="outlined" size='small' required value={postData.title} onChange={e => setPostData({ ...postData, title: e.target.value })} />
+                    <TextField
+                        label="Message"
+                        name="message"
+                        multiline
+                        required
+                        rows={4}
+                        value={postData.message} onChange={e => setPostData({ ...postData, message: e.target.value })}
+                    />
+                    <TextField label="Tags (comma separated)" required name="tags" variant="outlined" size='small' value={postData.tags} onChange={e => setPostData({ ...postData, tags: e.target.value.split(',') })} />
+                    <FileBase
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
+                    />
+                    <Button variant="contained" type="submit">Submit</Button>
+                    <Button variant="contained" onClick={clearData} color="error">Cancel</Button>
+                </PostForm>}
         </FormContainer >
     )
 }
