@@ -10,7 +10,6 @@ API.interceptors.request.use((req) => {
     return req
 })
 
-// const url = 'https://muss-memories.herokuapp.com/posts';
 
 export const fetchPosts = () => API.get('/posts');
 
